@@ -1,0 +1,154 @@
+package linkedlist;
+interface LinkedList
+{
+	void insertAtFirst(int element);
+	void insertAtLast(int element);
+	void deleteFromFirst();
+	void deleteFromLast();
+	boolean isEmpty();
+	int size();
+	int first();
+	int last();
+}
+
+class Node
+{
+	int data;
+	Node next;
+	
+	Node(int e, Node n)
+	{
+		data = e;
+		next = n;
+	}
+	
+	int getElement()
+	{
+		return data;
+	}
+
+	public Node getNext() {
+		return next;
+	}
+
+	public void setNext(Node next) {
+		this.next = next;
+	}
+}
+
+public class LinkedListTest implements LinkedList
+{
+	Node head = null;
+	Node tail = null;
+	int size = 0;
+	@Override
+	public void insertAtFirst(int element)
+	{
+		
+			head = new Node(element,head);
+		
+	}
+
+	@Override
+	public void insertAtLast(int element)
+	{
+		if(head == null)
+		{
+			insertAtFirst(element);
+		}
+		else{
+			Node temp = head;
+			
+			while(temp.next != null)
+			{
+				temp = temp.next;
+			}
+			temp.next = new Node(element, null);
+			
+		}
+	}
+	
+	public void triverse()
+	{
+		Node temp = head;
+		while(temp != null)
+		{
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+	}
+
+	public void insertBefore(int before,int element)
+	{
+		Node pre = null;
+		Node current = head;
+		
+		while(current.next != null && !(current.data == before))
+		{
+			pre = current;
+			current = current.next;
+		}
+		pre.next = new Node(element,current);
+	}
+	@Override
+	public void deleteFromFirst() 
+	{
+		head = head.next;
+		
+	}
+
+	@Override
+	public void deleteFromLast() 
+	{
+		Node current = head;
+		Node previous = null;
+		
+		while(current.next != null)
+		{
+			
+		}		
+	}
+
+	@Override
+	public boolean isEmpty() 
+	{
+		return false;
+	}
+
+	@Override
+	public int size() 
+	{
+		int s=0;
+		while(head != null)
+		{
+			s++;
+			head = head.next;
+		}
+		return s;
+	}
+
+	@Override
+	public int first() 
+	{
+		return head.data;
+	}
+
+	@Override
+	public int last() 
+	{
+		return 0;
+	}
+	public static void main(String[] args) {
+		LinkedListTest l = new LinkedListTest();
+		
+		l.insertAtFirst(1);
+		l.insertAtLast(2);
+		l.insertAtLast(3);
+		l.insertAtLast(4);	
+		l.insertBefore(4,10);
+		l.deleteFromFirst();
+	
+		l.triverse();
+		
+	}
+}
